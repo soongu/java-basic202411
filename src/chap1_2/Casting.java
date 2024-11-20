@@ -43,7 +43,7 @@ public class Casting {
         // 명시적 형변환 -> downcasting
 
         // 타입이 다른 연산의 경우 큰 쪽에 맞춰서 자동 캐스팅
-        int v = 9;
+        int v = 91;
         double z = 6.6;
         double result = v + z;
 
