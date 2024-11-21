@@ -61,5 +61,31 @@ public class ArrayBasic {
 
         System.out.println(Arrays.toString(pets));
 
+        // 배열의 기본 값
+        /*
+            자바의 배열은 생성되는 순간 해당 공간에 기본값들을 채워넣음
+            정수형: 0
+            실수형: 0.0
+            논리형: false
+            문자형: ''
+            기타(String): null
+         */
+        System.out.println("===================");
+
+        int[] points = new int[4];
+        double[] dArr = new double[3];
+        boolean[] bArr = new boolean[5];
+        char[] cArr = new char[3];
+        String[] sArr = new String[4];
+        System.out.println(points.length);
+        System.out.println(Arrays.toString(points));
+        System.out.println(Arrays.toString(dArr));
+        System.out.println(Arrays.toString(bArr));
+        System.out.println(Arrays.toString(cArr));
+        System.out.println(Arrays.toString(sArr));
+
+        Math[] maths = new Math[2];
+        System.out.println(Arrays.toString(maths));
+
     }
 }
