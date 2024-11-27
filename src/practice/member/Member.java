@@ -3,6 +3,7 @@ package practice.member;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+// 역할: 한 명의 회원정보를 잘 들고 있으면 됨
 public class Member {
 
     /*
@@ -30,5 +31,11 @@ public class Member {
         this.gender = gender;
         this.age = age;
         this.registerDate = LocalDateTime.now();
+    }
+
+    // 한 명의 회원 정보를 출력하는 메서드
+    void inform() {
+        System.out.printf("# %s | %s | %s | %d세\n"
+                , email, memberName, gender, age);
     }
 }
