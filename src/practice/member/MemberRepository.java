@@ -47,4 +47,24 @@ public class MemberRepository {
         return false;
     }
 
+    /**
+     * 이메일을 통해 회원 목록 배열에서 해당 이메일을 가진
+     * 객체를 찾아 리턴하는 메서드
+     *
+     * @param targetEmail - 탐색 대상의 이메일
+     * @return - 이메일이 일치하는 회원을 반환, 일치하는 회원이 없다면
+     *           null을 반환한다.
+     * @author - 미스터홍
+     * @since - 2024.11.27
+     */
+    Member findMemberByEmail(String targetEmail) {
+        for (Member m : memberList) {
+            if (targetEmail.equals(m.email)) {
+                return m;
+            }
+        }
+        return null;
+    }
+
+
 }

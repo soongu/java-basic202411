@@ -27,6 +27,20 @@ public class MemberController {
         System.out.println("================================");
     }
 
+    // 3번 메뉴 개별 조회 입출력
+    void showDetails() {
+        String email = prompt("# 조회 대상의 이메일: ");
+
+        // 조회 대상을 탐색 -> 탐색 성공시 해당 객체를 받아옴
+        Member foundMember = mr.findMemberByEmail(email);
+
+        if (foundMember != null) {
+            foundMember.detailInfo();
+        } else {
+            System.out.println("\n# 조회 결과가 없습니다.");
+        }
+    }
+
     // 프로그램을 실행하는 메서드
     void start() {
         while (true) {
@@ -35,16 +49,63 @@ public class MemberController {
 
             switch (menuNum) {
                 case "1":
-                    System.out.println("회원정보 등록 시작!");
+                    signUp();
                     break;
                 case "2":
                     showAllMembers();
+                    break;
+                case "3":
+                    showDetails();
                     break;
                 case "7":
                     System.out.println("프로그램 종료하기!");
                     return;
             }
         }
+    }
+
+    // 이메일을 중복이 안될때까지 입력받고 중복이 안된 이메일을 리턴
+    String checkDuplicateEmailInput() {
+        while (true) {
+            String email = prompt("# 이메일: ");
+            if (mr.isDuplicateEmail(email)) {
+                System.out.println("# 이메일이 중복되었습니다.");
+            } else { // 중복이 안된 경우
+                return email;
+            }
+        }
+    }
+
+    Gender checkCorrectGenderInput() {
+        while(true) {
+            String genderString = prompt("성별 (M/F): ");
+            switch (genderString) {
+                case "M":
+                    return Gender.MALE;
+                case "F":
+                    return Gender.FEMALE;
+                default:
+                    System.out.println("# 성별을 M 또는 F로 입력하세요!");
+            }
+        }
+    }
+
+    // 회원가입을 입출력 처리하는 메서드
+    void signUp() {
+        System.out.println("\n ===== 회원 가입을 시작합니다. =====");
+
+        String email = checkDuplicateEmailInput();
+        String password = prompt("# 패스워드: ");
+        String name = prompt("# 이름: ");
+
+        Gender gender = checkCorrectGenderInput();
+
+        String age = prompt("# 나이: ");
+
+        // 회원 목록에 추가
+        mr.addMember(new Member(email, password, name, gender, Integer.parseInt(age)));
+
+        System.out.println("# 회원가입이 완료되었습니다.");
     }
 
     // 전체 회원 정보를 화면에 출력하는 메서드
