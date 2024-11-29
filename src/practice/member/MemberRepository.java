@@ -58,13 +58,56 @@ public class MemberRepository {
      * @since - 2024.11.27
      */
     Member findMemberByEmail(String targetEmail) {
+        // 회원 목록에서 회원 한명씩 반복해서 추출
         for (Member m : memberList) {
+            // 주어진 이메일과 그 회원 한명의 이메일이 일치하는 순간
             if (targetEmail.equals(m.email)) {
+                // 그 회원을 갖다준다.
                 return m;
             }
         }
+        // 못 찾으면 그 증거로 null을 가져다줌.
         return null;
     }
 
+
+    void updatePassword(String inputEmail, String newPassword) {
+        // 탐색
+        Member foundMember = findMemberByEmail(inputEmail);
+        // 변경
+        foundMember.password = newPassword;
+    }
+
+    boolean isPasswordMatch(String storedPassword, String inputPassword) {
+        return storedPassword.equals(inputPassword);
+    }
+
+    // 회원 탈퇴 처리
+    void removeMember(String email) {
+
+        // 삭제 대상의 인덱스를 알아내야 함.
+        int index = findIndexByEmail(email);
+
+
+        // 삭제 대상부터 앞으로 한칸씩 땡기기
+        for (int i = index; i < memberList.length - 1; i++) {
+            memberList[i] =  memberList[i + 1];
+        }
+        Member[] temp = new Member[memberList.length - 1];
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = memberList[i];
+        }
+        memberList = temp;
+    }
+
+    int findIndexByEmail(String inputEmail) {
+        for (int i = 0; i < memberList.length; i++) {
+            String storedEmail = memberList[i].email;
+            if (inputEmail.equals(storedEmail)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 }

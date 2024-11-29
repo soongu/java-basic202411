@@ -57,10 +57,62 @@ public class MemberController {
                 case "3":
                     showDetails();
                     break;
+                case "4":
+                    changePassword();
+                    break;
+                case "5":
+                    deleteMember();
+                    break;
                 case "7":
                     System.out.println("프로그램 종료하기!");
                     return;
             }
+        }
+    }
+
+    // 회원정보 삭제에 대한 입출력 처리
+    void deleteMember() {
+
+        String inputEmail = prompt("# 삭제 대상의 이메일: ");
+        Member foundMember = mr.findMemberByEmail(inputEmail);
+        if (foundMember != null) {
+
+            // 삭제 전에 패스워드를 검증
+            String inputPassword = prompt("# 비밀번호: ");
+            if (mr.isPasswordMatch(foundMember.password, inputPassword)) {
+                // 실제로 삭제 진행
+                mr.removeMember(inputEmail);
+            } else {
+                // 비번 틀림
+                System.out.println("\n# 비밀번호가 일치하지 않습니다. 삭제를 취소합니다.");
+            }
+
+        } else {
+            System.out.println("\n# 조회 결과가 없습니다.");
+        }
+    }
+
+    // 회원정보 수정(비번)에 관한 입출력 처리
+    void changePassword() {
+        String inputEmail = prompt("# 수정 대상의 이메일: ");
+
+        Member foundMember = mr.findMemberByEmail(inputEmail);
+        if (foundMember != null) {
+            System.out.printf("\n# %s님의 비밀번호를 변경합니다.\n", foundMember.memberName);
+            String newPassword = prompt("# 새 비밀번호: ");
+
+            // 만일 기존 비번과 새 비번이 같으면 거절
+            if (foundMember.password.equals(newPassword)) {
+                System.out.println("\n# 기존 비밀번호와 같습니다. 변경을 취소합니다.");
+                return;
+            }
+
+            // 실질적인 패스워드 변경 처리
+            mr.updatePassword(inputEmail, newPassword);
+            System.out.println("# 비밀번호 변경이 완료되었습니다.");
+
+        } else {
+            System.out.println("\n# 조회 결과가 없습니다.");
         }
     }
 
