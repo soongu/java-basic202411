@@ -16,7 +16,8 @@ public class MemberController {
 
     // 프로그램 초기 화면 출력
     void mainView() {
-        System.out.println("\n#####  회원 관리 시스템  #####");
+        int size = mr.size();
+        System.out.printf("\n#####  회원 관리 시스템 (현재 회원 수: %d명)  #####\n", size);
         System.out.println("* 1. 회원 정보 등록하기");
         System.out.println("* 2. 전체 회원 조회하기");
         System.out.println("* 3. 개별 회원 조회하기");
@@ -44,6 +45,7 @@ public class MemberController {
     // 프로그램을 실행하는 메서드
     void start() {
         while (true) {
+            int size = mr.size();
             mainView();
             String menuNum = prompt(">> ");
 
@@ -61,12 +63,31 @@ public class MemberController {
                     changePassword();
                     break;
                 case "5":
+                    if (size == 0) {
+                        System.out.println("# 현재 회원이 존재하지 않으므로 삭제를 할 수 없습니다.");
+                        break;
+                    }
                     deleteMember();
+                    break;
+                case "6":
+                    restoreMember();
                     break;
                 case "7":
                     System.out.println("프로그램 종료하기!");
                     return;
             }
+        }
+    }
+
+    void restoreMember() {
+        String inputEmail = prompt("# 복구 대상의 이메일: ");
+        // 복구 대상 탐색 및 복구 처리
+        boolean flag = mr.restore(inputEmail);
+
+        if (flag) {
+            System.out.println("\n# 복구처리가 완료되었습니다.");
+        } else {
+            System.out.println("\n# 복구에 실패했습니다.");
         }
     }
 
@@ -82,6 +103,7 @@ public class MemberController {
             if (mr.isPasswordMatch(foundMember.password, inputPassword)) {
                 // 실제로 삭제 진행
                 mr.removeMember(inputEmail);
+                System.out.println("\n# 회원 탈퇴가 정상 처리되었습니다. 복구하시려면 복구메뉴를 이용하세요.");
             } else {
                 // 비번 틀림
                 System.out.println("\n# 비밀번호가 일치하지 않습니다. 삭제를 취소합니다.");
