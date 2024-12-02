@@ -7,6 +7,9 @@ public class Player extends Object {
     int level;
     int hp;
 
+    public Player() {
+    }
+
     public Player(String nickname) {
         this.nickname = nickname;
         this.level = 1;
