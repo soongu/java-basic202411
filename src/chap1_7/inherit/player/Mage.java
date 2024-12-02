@@ -1,25 +1,18 @@
 package chap1_7.inherit.player;
 
-public class Mage {
-    String nickname;
-    int level;
-    int hp;
+public class Mage extends Player {
 
     int mana; // 마력 게이지
 
     public Mage(String nickname) {
-        this.nickname = nickname;
-        this.level = 1;
-        this.hp = 50;
+        super(nickname);
         this.mana = 60;
     }
 
-    // 상태정보를 확인하는 메서드
+    @Override
     public void showStatus() {
-        System.out.println("===== Player's Info =====");
-        System.out.println("# 닉네임: " + nickname);
-        System.out.println("# 레벨: " + level);
-        System.out.println("# 체력: " + hp);
+        super.showStatus();
+        System.out.println("# 마력: " + mana);
     }
 
     // 마법사 스킬
