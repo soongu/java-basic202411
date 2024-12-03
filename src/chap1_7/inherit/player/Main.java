@@ -30,5 +30,14 @@ public class Main {
         mage.fireBall(new Mage("다른마봅사"));
 
         mage.fireBall(mage);
+
+        System.out.println("============");
+
+        mage.thunderbolt(warrior, hunter
+                , new Mage("냠냠이")
+                , new Hunter("원생이")
+                , new Warrior("막띠려")
+                , mage
+        );
     }
 }
