@@ -1,16 +1,20 @@
 package practice.member;
 
+import chap1_9.util.InputUtil;
+
 import java.util.Scanner;
+
+import static chap1_9.util.InputUtil.*;
 
 // 역할: 회원관리 앱의 입출력을 담당
 public class MemberController {
 
     // 필드 - 의존성 필드 (객체가 일을 하기 위해 다른 객체에 의존(협력))
-    Scanner sc;
+//    Scanner sc;
     MemberRepository mr;
 
     MemberController() {
-        this.sc = new Scanner(System.in);
+//        this.sc = new Scanner(System.in);
         this.mr = new MemberRepository();
     }
 
@@ -30,7 +34,7 @@ public class MemberController {
 
     // 3번 메뉴 개별 조회 입출력
     void showDetails() {
-        String email = prompt("# 조회 대상의 이메일: ");
+        String email = inputStr("# 조회 대상의 이메일: ");
 
         // 조회 대상을 탐색 -> 탐색 성공시 해당 객체를 받아옴
         Member foundMember = mr.findMemberByEmail(email);
@@ -47,7 +51,7 @@ public class MemberController {
         while (true) {
             int size = mr.size();
             mainView();
-            String menuNum = prompt(">> ");
+            String menuNum = inputStr(">> ");
 
             switch (menuNum) {
                 case "1":
@@ -80,7 +84,7 @@ public class MemberController {
     }
 
     void restoreMember() {
-        String inputEmail = prompt("# 복구 대상의 이메일: ");
+        String inputEmail = inputStr("# 복구 대상의 이메일: ");
         // 복구 대상 탐색 및 복구 처리
         boolean flag = mr.restore(inputEmail);
 
@@ -94,12 +98,12 @@ public class MemberController {
     // 회원정보 삭제에 대한 입출력 처리
     void deleteMember() {
 
-        String inputEmail = prompt("# 삭제 대상의 이메일: ");
+        String inputEmail = inputStr("# 삭제 대상의 이메일: ");
         Member foundMember = mr.findMemberByEmail(inputEmail);
         if (foundMember != null) {
 
             // 삭제 전에 패스워드를 검증
-            String inputPassword = prompt("# 비밀번호: ");
+            String inputPassword = inputStr("# 비밀번호: ");
             if (mr.isPasswordMatch(foundMember.password, inputPassword)) {
                 // 실제로 삭제 진행
                 mr.removeMember(inputEmail);
@@ -116,12 +120,12 @@ public class MemberController {
 
     // 회원정보 수정(비번)에 관한 입출력 처리
     void changePassword() {
-        String inputEmail = prompt("# 수정 대상의 이메일: ");
+        String inputEmail = inputStr("# 수정 대상의 이메일: ");
 
         Member foundMember = mr.findMemberByEmail(inputEmail);
         if (foundMember != null) {
             System.out.printf("\n# %s님의 비밀번호를 변경합니다.\n", foundMember.memberName);
-            String newPassword = prompt("# 새 비밀번호: ");
+            String newPassword = inputStr("# 새 비밀번호: ");
 
             // 만일 기존 비번과 새 비번이 같으면 거절
             if (foundMember.password.equals(newPassword)) {
@@ -141,7 +145,7 @@ public class MemberController {
     // 이메일을 중복이 안될때까지 입력받고 중복이 안된 이메일을 리턴
     String checkDuplicateEmailInput() {
         while (true) {
-            String email = prompt("# 이메일: ");
+            String email = inputStr("# 이메일: ");
             if (mr.isDuplicateEmail(email)) {
                 System.out.println("# 이메일이 중복되었습니다.");
             } else { // 중복이 안된 경우
@@ -152,7 +156,7 @@ public class MemberController {
 
     Gender checkCorrectGenderInput() {
         while(true) {
-            String genderString = prompt("성별 (M/F): ");
+            String genderString = inputStr("성별 (M/F): ");
             switch (genderString) {
                 case "M":
                     return Gender.MALE;
@@ -169,12 +173,12 @@ public class MemberController {
         System.out.println("\n ===== 회원 가입을 시작합니다. =====");
 
         String email = checkDuplicateEmailInput();
-        String password = prompt("# 패스워드: ");
-        String name = prompt("# 이름: ");
+        String password = inputStr("# 패스워드: ");
+        String name = inputStr("# 이름: ");
 
         Gender gender = checkCorrectGenderInput();
 
-        String age = prompt("# 나이: ");
+        String age = inputStr("# 나이: ");
 
         // 회원 목록에 추가
         mr.addMember(new Member(email, password, name, gender, Integer.parseInt(age)));
@@ -192,13 +196,13 @@ public class MemberController {
         }
         System.out.println("\n======== 엔터를 눌러서 계속.... ======");
         // 입력커서를 생성해서 코드를 잠시 중단시킴
-        sc.nextLine();
+        inputStr("");
     }
 
 
     // 입력을 쉽게 처리해주는 메서드
-    String prompt(String message) {
-        System.out.print(message);
-        return sc.nextLine();
-    }
+//    String prompt(String message) {
+//        System.out.print(message);
+//        return sc.nextLine();
+//    }
 }

@@ -1,10 +1,12 @@
 package chap1_9.static_;
 
+import static chap1_9.static_.Count.*;
+
 public class Main {
     public static void main(String[] args) {
 
-        Count.x = 10;
-        Count.m1();
+        x = 10;
+        m1();
 
         // 객체 생성
         Count c1 = new Count();
@@ -23,12 +25,12 @@ public class Main {
         System.out.println("c1.y = " + c1.y);
         System.out.println("c2.y = " + c2.y);
 
-        Count.x = 99;
-        Count.x -= 92;
-        Count.x = 50000;
-        System.out.println("c1.x = " + Count.x);
-        System.out.println("c2.x = " + Count.x);
-        System.out.println("c3.x = " + Count.x);
+        x = 99;
+        x -= 92;
+        x = 50000;
+        System.out.println("c1.x = " + x);
+        System.out.println("c2.x = " + x);
+        System.out.println("c3.x = " + x);
 
 
         System.out.println(Math.PI);

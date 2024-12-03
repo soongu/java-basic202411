@@ -1,5 +1,9 @@
 package chap1_9.depart;
 
+import chap1_3.StringCompare;
+
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -13,5 +17,7 @@ public class Main {
         biology.addStudent(50);
 
         System.out.println("전체 학생 수: " + Department.getTotalStudentCount());
+
+
     }
 }
