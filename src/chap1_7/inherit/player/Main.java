@@ -23,6 +23,12 @@ public class Main {
         mage.showStatus();
         hunter.showStatus();
 
-        System.out.println();
+        System.out.println("================");
+
+        mage.fireBall(warrior);
+        mage.fireBall(hunter);
+        mage.fireBall(new Mage("다른마봅사"));
+
+        mage.fireBall(mage);
     }
 }

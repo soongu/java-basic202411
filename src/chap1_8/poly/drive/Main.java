@@ -4,9 +4,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Car sonata1 = new Sonata();
+        Sonata sonata1 = new Sonata();
         Car sonata2 = new Sonata();
-        Car sonata3 = new Sonata();
+        Sonata sonata3 = new Sonata();
 
         // 쏘나타를 배열에 저장
 //        Sonata[] sonataList = {sonata1, sonata2, sonata3};
@@ -15,12 +15,12 @@ public class Main {
 //            s.accelerate();
 //        }
 
-        Car tucson1 = new Tucson();
+        Tucson tucson1 = new Tucson();
         Car tucson2 = new Tucson();
 
 //        Tucson[] tucsonList = {tucson1, tucson2};
 
-        Car tesla1 = new Tesla();
+        Tesla tesla1 = new Tesla();
         Car tesla2 = new Tesla();
         Car tesla3 = new Tesla();
         Car tesla4 = new Tesla();
@@ -32,8 +32,39 @@ public class Main {
         Car[] carList = {sonata1, tucson1, tesla2, sonata2};
 
         for (Car car : carList) {
-
+            car.accelerate();
         }
 
+        System.out.println("=============");
+
+        Driver kim = new Driver();
+        kim.drive(tucson2);
+
+        System.out.println("=============");
+
+        CarShop shop = new CarShop();
+        Car car = shop.exportCar(3000);
+        car.accelerate();
+
+        kim.drive(shop.exportCar(6000));
+
+        System.out.println("=============");
+
+        Sonata mySonata = new Sonata();
+        mySonata.accelerate();
+        mySonata.joinSonataClub();
+
+//        Car[] cars = {mySonata};
+//        Car abc = mySonata;
+
+        Sonata boughtCar = (Sonata) shop.exportCar(3000);
+        boughtCar.accelerate();
+        boughtCar.joinSonataClub();
+
+        int f = (int) foo() / 3;
+    }
+
+    static double foo() {
+        return 9.9;
     }
 }
