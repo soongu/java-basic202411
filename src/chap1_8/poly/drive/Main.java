@@ -4,6 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         Sonata sonata1 = new Sonata();
         Car sonata2 = new Sonata();
         Sonata sonata3 = new Sonata();
