@@ -157,10 +157,10 @@ public class MemberController {
     Gender checkCorrectGenderInput() {
         while(true) {
             String genderString = inputStr("성별 (M/F): ");
-            switch (genderString) {
-                case "M":
+            switch (genderString.toUpperCase().charAt(0)) {
+                case 'M': case 'ㅡ':
                     return Gender.MALE;
-                case "F":
+                case 'F':
                     return Gender.FEMALE;
                 default:
                     System.out.println("# 성별을 M 또는 F로 입력하세요!");
