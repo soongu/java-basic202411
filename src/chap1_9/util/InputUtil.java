@@ -14,7 +14,13 @@ public class InputUtil {
     }
     // 정수 입력을 처리하는 메서드
     public static int inputInt(String message) {
-        String str = inputStr(message);
-        return Integer.parseInt(str);
+        while (true) {
+            try {
+                String str = inputStr(message);
+                return Integer.parseInt(str);
+            } catch (NumberFormatException e) {
+                System.out.println("정수형 숫자로 정확히 입력하세요");
+            }
+        }
     }
 }
