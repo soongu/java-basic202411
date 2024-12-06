@@ -1,9 +1,11 @@
 package chap2_3.generic.list;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 // 제네릭 배열을 관리하는 제네릭 리스트 클래스
-public class GenericList<T> {
+public class GenericList<T> implements Iterable<T> {
 
     // 속성
     private T[] arr;
@@ -46,6 +48,26 @@ public class GenericList<T> {
     @Override
     public String toString() {
         return Arrays.toString(arr);
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private int currentIndex = 0;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < arr.length;
+            }
+
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                return arr[currentIndex++];
+            }
+        };
     }
 }
 
