@@ -11,7 +11,7 @@ public class StringList {
     String[] sArr;
 
     // 생성자
-    StringList() {
+    public StringList() {
         sArr = new String[0];
     }
 
@@ -31,7 +31,7 @@ public class StringList {
 
 
     // foods 배열의 요소를 출력
-    void printArray() {
+    public void printArray() {
         System.out.println(Arrays.toString(sArr));
     }
 
@@ -45,7 +45,7 @@ public class StringList {
     }
 
     // foods배열에 새 음식을 추가하는 함수
-    void push(String newItem) {
+    public void push(String newItem) {
         // 1. 사이즈가 1개 더 큰 배열을 생성
         // 2. 원본내용을 복사
         String[] temp = copy(1);
