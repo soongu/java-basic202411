@@ -20,7 +20,8 @@ public class Artist {
      * @return - 성공적으로 중복없이 추가되면 true, 아니면 false
      */
     public boolean addSong(String songName) {
-        return false;
+        boolean flag = this.songList.add(songName);
+        return flag;
     }
 
     // 노래목록을 가져오는 기능

@@ -17,23 +17,42 @@ public class ArtistRepository {
 
     // 현재 저장된 가수의 숫자를 알려주는 메서드
     public int count() {
-        return 0;
+        return artistMap.size();
     }
 
     // 현재 주어진 가수명이 map에 있는지 확인하는 기능
     // containsKey() 메서드를 검색해보세요
     public boolean isRegistered(String artistName) {
-        return false;
+        return artistMap.containsKey(artistName);
     }
 
     // 새로운 가수 객체 정보를 map에 저장하는 기능
     public void addNewArtist(String artistName, String songName) {
+        // 신규가수를 생성
+        Artist newArtist = new Artist(artistName);
 
+        // 노래를 노래리스트에 추가
+        newArtist.addSong(songName);
+
+        // 신규가수를 맵에 저장
+        artistMap.put(artistName, newArtist);
     }
 
     // 주어진 가수명으로 가수의 노래트랙리스트를 가져오는 기능
     public Set<String> getTrackList(String artistName) {
-        return null;
+        // 맵에서 가수를 꺼냄
+        Artist artist = artistMap.get(artistName);
+        Set<String> songList = artist.getSongList();
+        return songList;
     }
 
+    // 기존 가수에게 노래만 추가하는 기능
+    public boolean addNewSong(String name, String song) {
+        // 기존 가수를 맵에서 꺼내옴
+        Artist artist = artistMap.get(name);
+
+        // 그 가수의 노래리스트에 노래를 추가
+        boolean flag = artist.addSong(song);
+        return flag;
+    }
 }
