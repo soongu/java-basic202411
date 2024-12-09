@@ -31,5 +31,61 @@ public class Main {
         List<Apple> yellows = filterApplesByColor(appleBasket, YELLOW);
         System.out.println("yellows = " + yellows);
 
+
+        System.out.println("=============");
+
+        List<Apple> weightGT150 = filterApples(appleBasket, new AppleWeightPredicate());
+        System.out.println("weightGT150 = " + weightGT150);
+
+        // 빨강색이면서 무게가 150 미만인 사과를 필터링
+        List<Apple> applesSomethings = filterApples(appleBasket, new AppleSomething());
+        System.out.println("applesSomethings = " + applesSomethings);
+
+        System.out.println("========");
+
+        // 색상이 빨강색이거나 녹색인 사과를 필터링
+        List<Apple> applesGorR = filterApples(appleBasket, new AppleGreenOrRed());
+        System.out.println("applesGorR = " + applesGorR);
+
+        // 빨강색이면서 무거운 (100 이상) 사과 필터링
+        System.out.println("================");
+
+        List<Apple> redHeavyApples = filterApples(appleBasket, new ApplePredicate() {
+            @Override
+            public boolean test(Apple apple) {
+                return apple.getColor() == RED && apple.getWeight() > 100;
+            }
+        });
+
+        System.out.println("redHeavyApples = " + redHeavyApples);
+
+        System.out.println("========");
+
+        // 노랑색 사과만 필터링
+        List<Apple> yellowApples = filterApples(appleBasket, (a) -> a.getColor() == YELLOW);
+        System.out.println("yellowApples = " + yellowApples);
+
+        System.out.println("========");
+
+        // 숫자목록에서 짝수 필터링
+        List<Integer> numbers = List.of(1,2,3,4,5,6);
+        List<Integer> filterNumbers = filter(numbers, n -> n % 2 == 0);
+        System.out.println("filterNumbers = " + filterNumbers);
+
+        List<String> foods = List.of("짜장면", "우동", "김", "탕수육");
+        List<String> filterFoods = filter(foods, f -> f.length() == 3);
+        System.out.println("filterFoods = " + filterFoods);
+
+
     }
+
+    // 내부 클래스
+    private static class AppleGreenOrRed implements ApplePredicate {
+
+        @Override
+        public boolean test(Apple apple) {
+            return apple.getColor() == RED || apple.getColor() == GREEN;
+        }
+    }
+
 }

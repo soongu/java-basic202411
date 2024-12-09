@@ -48,4 +48,37 @@ public class FilterApple {
         return greenBasket;
     }
 
+    // 기능 (함수)를 파라미터화 할 수 있는가?
+    // 함수를 전달할 수 없는 대신 객체를 전달하여 그 객체 안에 함수를 호출하는 식으로
+
+    /**
+     * @solution - try3: 동작(기능, 메서드)을 추상화시켜 파라미터화한다.
+     * @problem - 필터링 대상이 사과가 아니라면
+     */
+    public static List<Apple> filterApples(List<Apple> basket, ApplePredicate a) {
+        // 1. 필터링된 사과들만 담을 새 바구니 생성
+        List<Apple> filteredBasket = new ArrayList<>();
+
+        // 2. 반복문과 조건문을 통해 특정 조건의 사과를 필터링
+        for (Apple apple : basket) {
+            if (a.test(apple)) {
+                filteredBasket.add(apple);
+            }
+        }
+        return filteredBasket;
+    }
+
+    /**
+     * @solution - try4 : 여러 객체들을 필터링할 수 있도록 제네릭을 사용
+     */
+    public static <T> List<T> filter(List<T> list, GenericPredicate<T> p) {
+        List<T> filteredList = new ArrayList<>();
+        for (T t : list) {
+            if (p.test(t)) {
+                filteredList.add(t);
+            }
+        }
+        return filteredList;
+    }
+
 }
