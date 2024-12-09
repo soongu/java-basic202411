@@ -1,5 +1,9 @@
 package chap2_4.song;
 
+import chap2_5.fileio.FileExample;
+
+import java.io.*;
+import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -84,4 +88,29 @@ public class ArtistRepository {
 
         return artistData;
     }
+
+    // 가수 정보를 세이브파일에 저장하는 메서드
+    public void save() {
+        try (FileOutputStream fos = new FileOutputStream(FileExample.ROOT_PATH + "/artist.sav")) {
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(artistMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 가수 정보를 세이브파일로부터 로드하는 메서드
+    public void load() {
+        String savePath = FileExample.ROOT_PATH + "/artist.sav";
+        File saveFile = new File(savePath);
+        if (saveFile.exists()) {
+            try (FileInputStream fis = new FileInputStream(FileExample.ROOT_PATH + "/artist.sav")) {
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                artistMap = (Map<String, Artist>) ois.readObject();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
