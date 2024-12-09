@@ -4,6 +4,7 @@ import chap1_6.modi.pac1.A;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 // 사과를 여러가지 방법으로 필터링
 public class FilterApple {
@@ -71,7 +72,7 @@ public class FilterApple {
     /**
      * @solution - try4 : 여러 객체들을 필터링할 수 있도록 제네릭을 사용
      */
-    public static <T> List<T> filter(List<T> list, GenericPredicate<T> p) {
+    public static <T> List<T> filter(List<T> list, Predicate<T> p) {
         List<T> filteredList = new ArrayList<>();
         for (T t : list) {
             if (p.test(t)) {

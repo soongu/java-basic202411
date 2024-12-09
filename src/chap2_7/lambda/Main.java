@@ -4,6 +4,7 @@ import java.util.List;
 
 import static chap2_7.lambda.Color.*;
 import static chap2_7.lambda.FilterApple.*;
+import static chap2_7.lambda.MappingApple.*;
 
 public class Main {
 
@@ -76,6 +77,28 @@ public class Main {
         List<String> filterFoods = filter(foods, f -> f.length() == 3);
         System.out.println("filterFoods = " + filterFoods);
 
+        System.out.println("=========");
+
+        List<Color> colorList = mappingApplesByColor(appleBasket);
+        System.out.println("colorList = " + colorList);
+
+        System.out.println("==========");
+
+//        MappingApple.mappingApples(appleBasket, new AppleFunction<Integer>() {
+//            @Override
+//            public Integer apply(Apple apple) {
+//                return apple.getWeight();
+//            }
+//        });
+
+        List<Integer> weightList = mappingApples(appleBasket, apple -> apple.getWeight());
+        System.out.println("weightList = " + weightList);
+
+        System.out.println("========");
+
+        List<Integer> nums = List.of(1, 2, 3, 4, 5);
+        List<Integer> mappingNums = mapping(nums, n -> n * 3);
+        System.out.println("mappingNums = " + mappingNums);
 
     }
 
