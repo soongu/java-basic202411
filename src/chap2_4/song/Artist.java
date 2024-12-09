@@ -28,4 +28,12 @@ public class Artist {
     public Set<String> getSongList() {
         return songList;
     }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "artistName='" + artistName + '\'' +
+                ", songList=" + songList +
+                '}';
+    }
 }
