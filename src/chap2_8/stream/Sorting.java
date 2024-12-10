@@ -31,6 +31,12 @@ public class Sorting {
         System.out.println("================");
 
         // 칼로리가 300이상인 요리 중 칼로리가 낮은 탑3를 필터링
+        menuList.stream()
+                .filter(m -> m.getCalories() >= 300)
+                .sorted(Comparator.comparing(Dish::getCalories))
+                .limit(3)
+                .collect(toList())
+                .forEach(System.out::println);
 
     }
 }
